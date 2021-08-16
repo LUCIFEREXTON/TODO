@@ -2,9 +2,7 @@ const mongoose = require('mongoose')
 const Todo = require('../Models/Todo')
 
 exports.add = async(req, res) => {
-    const { todotext } = req.body;
-    const userId = mongoose.Types.ObjectId(req.bodyuserId);
-    const listId = mongoose.Types.ObjectId(req.bodylistId);
+    const { todotext, userId, listId } = req.body;
     const newTodo = new Todo({
         todotext,
         userId,
@@ -32,16 +30,17 @@ exports.complete = async(req, res) => {
     const todoid = mongoose.Types.ObjectId(req.body.todoid);
     const { curstatus } = req.body;
     try {
-        const res = await Todo.updateOne({ _id: todoid }, { completed: !curstatus })
-        if (res.nModified)
+        const deleted = await Todo.updateOne({ _id: todoid }, { completed: !curstatus })
+        if (deleted.nModified) {
             return res.json({
                 error: null
             })
+        }
         return res.json({
             error: 'not modified'
         })
     } catch (err) {
-        console.log('/deletetodo:Err:-', err);
+        console.log('/completetodo:Err:-', err);
         return res.json({
             error: 'Server crashed'
         })
@@ -51,8 +50,8 @@ exports.complete = async(req, res) => {
 exports.del = async(req, res) => {
     const todoid = mongoose.Types.ObjectId(req.body.todoid);
     try {
-        const res = await Todo.deleteOne({ _id: todoid });
-        if (res.ok)
+        const deleted = await Todo.deleteOne({ _id: todoid });
+        if (deleted.ok)
             return res.json({
                 error: null
             })
@@ -70,7 +69,7 @@ exports.del = async(req, res) => {
 
 exports.gettodo = async(req, res) => {
     try {
-        const listid = mongoose.Types.ObjectId(req.body.listId);
+        const { listid } = req.body;
         const todos = await Todo.find({ listId: listid });
         return res.json({
             error: null,

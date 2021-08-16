@@ -16,16 +16,19 @@ const TodoElement = ({id, text, completed, complete, del})=>{
         }
     }
     const handleDelete = async()=>{
-        try {
-            const res = await axios.post(process.env.REACT_APP_SERVER + 'usertodo/delete', { todoid:id });
-            const { error } = res.data;
-            if (error === null) {
-                del(id);
-            }else{
-                console.log(error);
+        const shouldDelete = window.confirm("Are You sure you want to delete");
+        if(shouldDelete){
+            try {
+                const res = await axios.post(process.env.REACT_APP_SERVER + 'usertodo/delete', { todoid:id });
+                const { error } = res.data;
+                if (error === null) {
+                    del(id);
+                }else{
+                    console.log(error);
+                }
+            } catch (err) {
+                console.log(err);
             }
-        } catch (err) {
-            console.log(err);
         }
     }
     return(

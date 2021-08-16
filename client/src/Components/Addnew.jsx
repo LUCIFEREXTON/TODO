@@ -50,7 +50,7 @@ const Addnew = ({Label, addto, userId, listId ,addtotodo, addtolist})=>{
 
 const mapStateToProps = state =>{
     return {
-      userId : state.loggedInUser?.id,
+      userId : state.loggedInUser?._id,
       listId : state.selectedListid
     }
 }

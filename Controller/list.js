@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const List = require('../Models/List')
+const User = require('../Models/User')
 const Todo = require('../Models/Todo')
 exports.add = async(req, res) => {
     const { name } = req.body
@@ -27,15 +28,22 @@ exports.add = async(req, res) => {
 }
 
 exports.del = async(req, res) => {
-    const listid = mongoose.Types.ObjectId(req.body.listid);
+    const { listid } = req.body;
     try {
-        const res1 = await Todo.deleteMany({ listId: listid });
-        if (res1.ok) {
-            const res2 = await List.deleteOne({ _id: listid });
-            if (res2.ok)
-                return res.json({
-                    error: null
-                })
+        const user = await User.findOne({ defaultListid: listid });
+        if (!user) {
+            const res1 = await Todo.deleteMany({ listId: listid });
+            if (res1.ok) {
+                const res2 = await List.deleteOne({ _id: listid });
+                if (res2.ok)
+                    return res.json({
+                        error: null
+                    })
+            }
+        } else {
+            return res.json({
+                error: 'DefaultList can\'t be deleted'
+            })
         }
         return res.json({
             error: 'Something went wrong'

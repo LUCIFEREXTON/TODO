@@ -1,24 +1,27 @@
 import {connect} from 'react-redux'
 import axios from 'axios'
-const ListName = ({id, name, selectedListid, dellist, selectlist})=>{
+const ListName = ({id, name, selectedListid, dellist, selectlist, deleteable})=>{
     const onDelete = async(e) =>{
         e.stopPropagation();
-        try {
-            const res = await axios.post(process.env.REACT_APP_SERVER + 'userlist/delete', { listid:id });
-            const { error } = res.data;
-            if (error === null) {                
-                dellist(id)
+        const shouldDelete = window.confirm("Are You sure you want to delete");
+        if(shouldDelete){
+            try {
+                const res = await axios.post(process.env.REACT_APP_SERVER + 'userlist/delete', { listid:id });
+                const { error } = res.data;
+                if (error === null) {                
+                    dellist(id)
+                }
+                console.log(error);
+            } catch (err) {
+                console.log(err);
             }
-            console.log(error);
-        } catch (err) {
-            console.log(err);
         }
     }
     return (
         <div className={`listname ${id===selectedListid && 'selected'}`} onClick={()=>{selectlist(id)}}>
             {name.toUpperCase()}
             <br />
-            <button onClick={onDelete}>Delete</button>
+            {deleteable && <button onClick={onDelete}>Delete</button>}
             <hr />
         </div>
     );

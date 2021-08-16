@@ -9,10 +9,8 @@ const Category = ({auth, logout, lists, loggedInUser, setlists})=>{
         const fetchlist = async ()=>{
             if(loggedInUser){
                 try{
-                    console.log(loggedInUser?._id);
                     const res = await axios.post(process.env.REACT_APP_SERVER + 'userlist/getlists', { userId:loggedInUser?._id });
                     const { error, lists } = res.data;
-                    console.log(JSON.stringify(lists))
                     if (error === null) {
                         setlists(lists);
                     }else{
@@ -36,7 +34,7 @@ const Category = ({auth, logout, lists, loggedInUser, setlists})=>{
             </button>
             <Addnew Label="List" addto='list'/>
             <div className='listnames'>
-                {lists?.map(list =><ListName key={list._id} id={list._id} name={list.name}/>)}
+                {lists?.map(list =><ListName key={list._id} id={list._id} name={list.name} deleteable={list._id!==loggedInUser.defaultListid}/>)}
             </div>
         </div>
     );

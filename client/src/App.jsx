@@ -8,7 +8,7 @@ import {connect } from 'react-redux'
 function App({auth, setauthstate, setuser}) {
   useEffect(()=>{
     const token = Cookies.get('token');
-    if(token && !auth){
+    if(token){
       const user = jwt.verify(token, process.env.REACT_APP_SECRET)._doc
       setuser(user);
       setauthstate(true);

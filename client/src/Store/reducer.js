@@ -61,7 +61,8 @@ const reducer = (state = initialState, action) => {
                 const { list } = action
                 return {
                     ...state,
-                    lists: state.lists.concat(list)
+                    lists: state.lists.concat(list),
+                    selectedListid: list._id
                 }
             }
         case 'COMPLETE_TODO':
