@@ -1,0 +1,156 @@
+/***********body*****************/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/***********Login*****************/
+
+.loginback {
+    text-align: center;
+    font-weight: 900;
+    font-size: 1.5rem;
+    position: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    background: rgb(114, 212, 224);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+#state {
+    margin: 5px;
+}
+
+.loginmodal {
+    border: 2px solid rgb(3, 203, 230);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.loginmodal input {
+    font-size: 2rem;
+    margin: 10px;
+}
+
+
+/***********Mainpage*****************/
+
+.main {
+    display: flex;
+}
+
+
+/***********Content****************/
+
+.content {
+    min-height: 100vh;
+    width: 80vw;
+    max-width: 80vw;
+    flex-grow: 1;
+    background: rgb(121, 224, 228);
+}
+
+#todolist {
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+    background: rgb(147, 225, 228);
+}
+
+#todolist .todoelement {
+    font-size: 2rem;
+    background: rgb(9, 115, 119);
+    margin: 20px 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.complete {
+    opacity: 0.4;
+}
+
+#todolist .text {
+    padding: 10px 20px;
+    color: white;
+    width: max-content;
+}
+
+
+/***********Category****************/
+
+.category {
+    flex-grow: 1;
+    width: 20vw;
+    min-height: 100vh;
+    background: rgb(9, 115, 119);
+    color: white;
+}
+
+.category>button {
+    width: 20vw;
+    position: sticky;
+    top: 0;
+    right: 0;
+    background: rgb(0, 225, 255);
+    font-size: 2rem;
+    padding: 20px;
+}
+
+.category>.listnames {
+    margin-top: 20px;
+    word-wrap: break-word;
+    /* border: 1px solid black; */
+}
+
+.listnames .listname {
+    /* border: 1px solid black; */
+    padding: 20px;
+    font-size: 2rem;
+}
+
+.listnames .listname button {
+    font-size: 1.5rem;
+    margin-left: 5px;
+}
+
+.listnames .selected {
+    background: rgb(121, 224, 228);
+    color: black;
+    margin-right: 50px;
+}
+
+
+/***********Add New Input***************/
+
+.add {
+    padding: 5px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: flex-end;
+    font-size: 1.5rem;
+    gap: 10px;
+    color: inherit;
+}
+
+.add>.label {
+    color: inherit;
+    width: 50%;
+    flex-grow: 1;
+}
+
+.add>.label>input {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.add>button {
+    font-size: 1.5rem;
+}
