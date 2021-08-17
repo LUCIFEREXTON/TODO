@@ -16,7 +16,7 @@
     },
     "devDependencies": {},
     "scripts": {
-        "start": "ENVS=prod node index",
+        "start": "node index",
         "server": "nodemon index.js",
         "client": "cd client && npm start",
         "devserver": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
